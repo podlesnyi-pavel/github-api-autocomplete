@@ -31,9 +31,8 @@ search.addEventListener('input', (event) => {
         .then((data) => {
           currentData = data.items.slice(0, 5);
 
-          const dropdownlList = currentData.map(
-            ({ id, full_name }, index) =>
-              `<div class="api-github-form__dropdown-item" data-id="${id}" data-index="${index}">${full_name}</div>`
+          const dropdownlList = currentData.map(({ id, full_name }, index) =>
+            createDropdownItem(id, full_name, index)
           );
 
           dropdown.innerHTML = dropdownlList.join('');
@@ -90,6 +89,10 @@ async function getRepositories(query) {
 
   const errorData = await response.json();
   throw new HttpError(`Error in request ${baseUrl}${query}`, errorData);
+}
+
+function createDropdownItem(id, full_name, index) {
+  return `<div class="api-github-form__dropdown-item" data-id="${id}" data-index="${index}">${full_name}</div>`;
 }
 
 function addReposItem(target) {
