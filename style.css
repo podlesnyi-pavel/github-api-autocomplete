@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+.roboto-regular {
+  font-family: 'Roboto', serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+:root {
+  --white: #fff;
+  --black: #000;
+  --red: #ff0000;
+  --color-main: var(--black);
+  --bg-gray: #c4c4c4;
+  --bg-dropdown-item: #e3e3e3;
+  --bg-repo-item: #e27beb;
+  --bg-hover: #65cdf9;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Roboto', serif;
+  font-weight: 400;
+  color: var(--color-main);
+}
+
+body {
+  margin: 0;
+}
+
+.body__inner {
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.api-github-form {
+  display: flex;
+  flex-direction: column;
+  width: 661px;
+  height: max-content;
+  padding: 62px 80px 72px 80px;
+  background-color: var(--bg-gray);
+}
+
+.api-github-form__search {
+  max-width: 500px;
+  height: 61px;
+  padding: 5px 13px;
+  border-color: var(--white);
+  font-size: 48px;
+  line-height: 56.25px;
+  outline: none;
+}
+
+.api-github-form__dropdown-item {
+  min-height: 44px;
+  padding: 5px 13px;
+  border: 2px solid var(--black);
+  background-color: var(--bg-dropdown-item);
+  font-size: 30px;
+  line-height: 35.16px;
+  transition: background-color 0.3s;
+  cursor: pointer;
+}
+
+.api-github-form__dropdown-item:hover {
+  background-color: var(--bg-hover);
+}
+
+.api-github-form__repos {
+  margin-top: 45px;
+}
+
+.api-github-form__repos-item {
+  position: relative;
+  padding: 8px 86px 8px 16px;
+  border: 1px solid var(--black);
+  background-color: var(--bg-repo-item);
+  font-size: 24px;
+  line-height: 28.13px;
+}
+
+.api-github-form__repos-close {
+  position: absolute;
+  top: 50%;
+  right: 34px;
+  transform: translateY(-50%);
+  width: 42px;
+  height: 39px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: transform 0.4s;
+}
+
+.api-github-form__repos-close:hover {
+  transform: scale(1.2) translateY(-50%);
+}
+
+.api-github-form__repos-close::before,
+.api-github-form__repos-close::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: center;
+  width: 4px;
+  height: 50px;
+  background-color: var(--red);
+}
+
+.api-github-form__repos-close::before {
+  transform: translateY(-50%) rotate(-45deg);
+}
+
+.api-github-form__repos-close::after {
+  transform: translateY(-50%) rotate(45deg);
+}
