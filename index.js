@@ -67,9 +67,6 @@ repos.addEventListener('click', (event) => {
 });
 
 function changeDisplay(elem, bool) {
-  console.log('elem', elem);
-  console.log('bool', bool);
-
   if (elem.hidden === bool) return;
   elem.hidden = bool;
 }
