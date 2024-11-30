@@ -17,7 +17,7 @@ const repos = form.querySelector('.api-github-form__repos');
 
 let timer;
 let currentData;
-let currentRepos = [];
+let currentRepos = new Map();
 
 search.addEventListener('input', (event) => {
   clearInterval(timer);
@@ -49,11 +49,8 @@ search.addEventListener('input', (event) => {
 
 dropdown.addEventListener('click', (event) => {
   const reposItem = addReposItem(event.target);
-
   if (!reposItem) return;
-
   repos.insertAdjacentHTML('afterbegin', reposItem);
-
   changeDisplay(repos, false);
   resetCurrentData();
   resetDropdown();
@@ -62,8 +59,7 @@ dropdown.addEventListener('click', (event) => {
 
 repos.addEventListener('click', (event) => {
   removeReposItem(event.target);
-
-  if (!currentRepos.length) changeDisplay(repos, true);
+  if (!currentRepos.size) changeDisplay(repos, true);
 });
 
 function changeDisplay(elem, bool) {
@@ -100,10 +96,10 @@ function addReposItem(target) {
   const id = target.dataset.id;
 
   if (!target.closest('.api-github-form__dropdown-item')) return;
-  if (currentRepos.some((repository) => repository.id === Number(id))) return;
+  if (currentRepos.has(id)) return;
 
   const index = target.dataset.index;
-  currentRepos.push(currentData[index]);
+  currentRepos.set(id, currentData[index]);
   const {
     name,
     owner: { login },
@@ -122,14 +118,10 @@ function addReposItem(target) {
 
 function removeReposItem(target) {
   if (!target.closest('.api-github-form__repos-close')) return;
-
   const reposItem = target.closest('.api-github-form__repos-item');
 
   if (reposItem) {
-    currentRepos = currentRepos.filter(
-      (repository) => repository.id !== Number(reposItem.dataset.id)
-    );
-
+    currentRepos.delete(reposItem.dataset.id);
     reposItem.remove();
   }
 }
